@@ -15,7 +15,7 @@ A docker image for running a dedicated server for the game [Dread Hunger](https:
 To build the docker image for this server and run it locally:
 
 1. Clone this repository: `git clone https://github.com/Laura7089/dread-hunger-docker.git`.
-2. Copy (or otherwise link) the `LinuxServer` directory from your game installation into the cloned repository.
+2. Copy (or otherwise link) the `LinuxServer` directory from your game installation[^1] into the cloned repository.
 3. Build the image: `docker build -t dread-hunger .` (this may need `sudo`).
 4. Run the server: `docker run -d -p 7777:7777/udp dread-hunger` (this may also need `sudo`).
 
@@ -39,3 +39,7 @@ How to do this is out of the scope of this guide, but usually involves either po
 
 The contents of this repo (except the banner image) are licensed under the GNU Affero General Public License.
 Dread Hunger is the property of Digital Confectioners; no credit is taken for the software in this image.
+
+[^1]: Unfortunately, because the Dread Hunger Team chose to distribute the server files using a client update rather than adding them as a separate
+  app to steam, this image cannot automate downloading the server files with `steamcmd` and so a copy of the client or the server files within are required..
+  If this is incorrect, please open an issue.
