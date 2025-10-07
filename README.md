@@ -4,7 +4,7 @@
 > As of 2024-01-01, **dread hunger is no longer supported by the developer and cannot be purchased from steam**.
 > This means you must already own the game on steam or otherwise have access to the files in order to be able to build this image.
 
-A docker image for running a dedicated server for the game [Dread Hunger](https://store.steampowered.com/app/1418630/Dread_Hunger/) on linux.
+A [docker](https://docs.docker.com/get-started/) image for running a dedicated server for the game [Dread Hunger](https://store.steampowered.com/app/1418630/Dread_Hunger/).
 
 ## Usage
 
@@ -12,26 +12,31 @@ A docker image for running a dedicated server for the game [Dread Hunger](https:
 
 To build the docker image for this server and run it locally:
 
-1. Clone this repository: `git clone https://github.com/Laura7089/dread-hunger-docker.git`.
-2. Copy (or otherwise link) the `LinuxServer` directory from your game installation[^1] into the cloned repository.
-3. Build the image: `docker build -t dread-hunger .` (don't forget that last `.`!).
+1. [Install docker](https://docs.docker.com/get-started/introduction/get-docker-desktop/) if you haven't already.
+2. Clone this repository: `git clone https://github.com/Laura7089/dread-hunger-docker.git`.
+3. Copy (or otherwise link) the `LinuxServer` directory from your game installation[^1] into the cloned repository.
+4. Build the image: `docker build -t dread-hunger .` (don't forget that last `.`!).
   This may need `sudo`.
-4. Run the server: `docker run --rm -p 7777:7777/udp dread-hunger`[^2].
+5. Run the server: `docker run --rm -p 7777:7777/udp dread-hunger`[^2].
   This may also need `sudo`.
 
-To do this usefully, you **must** have some way for other players to see your server.
-How to do this is out of the scope of this README, but usually involves either port forwarding or using a dedicated server machine.
+> [!NOTE]
+> For players to connect over the internet, you must have some way for other players to see your server.
+> How to do this is out of the scope of this README, but usually involves port forwarding, a peer-to-peer VPN or using a dedicated server machine.
 
 ### Connecting
 
-1. Open the game.
-2. Open the map table, and create a lobby. <!-- TODO: does this change any settings on the server??? -->
-3. Assemble your players in the lobby. <!-- TODO: how do players do this? -->
-4. When you're ready, light the boiler and sail the ship out of the harbour as normal.
-5. You will be presented with a prompt for an IP address.
+To connect to the server from the game:
+
+1. Run the server [as above](#building-and-running).
+2. Open the game.
+3. Open the map table, and create a lobby. <!-- TODO: does this change any settings on the server??? -->
+4. Assemble your players in the lobby. <!-- TODO: how do players do this? -->
+5. When you're ready, light the boiler and sail the ship out of the harbour as normal.
+6. You will be presented with a prompt for an IP address.
   Enter the IP address for the machine that is hosting your server (see above).
-  If you've changed the port with the `-p` parameter to docker, change the port from the default too.
-6. You and your players should connect. Enjoy!
+  If you've [changed the port](#port), enter your custom port instead of the default value.
+7. You and your players should connect. Enjoy!
 
 ## Configuration
 
@@ -67,7 +72,8 @@ docker run --rm -p 7777:7777/udp dread-hunger # run with the default port of 777
 docker run --rm -p 1234:7777/udp dread-hunger # run on port 1234
 ```
 
-You should always remap the port to `7777` inside the container (on the right hand side of the `:`), and always include `/udp` otherwise you **will not be able to connect**.
+> [!WARNING]
+> You should always remap the port to `7777` inside the container (on the right hand side of the `:`), and always include `/udp` otherwise you **will not be able to connect**.
 
 ## Licensing
 
@@ -75,6 +81,6 @@ The contents of this repo (except the banner image) are licensed under the GNU A
 Dread Hunger is the property of Digital Confectioners; no credit is taken for the software in this image.
 
 [^1]: Unfortunately, because the Dread Hunger Team chose to distribute the server files using a client update rather than adding them as a separate
-  app to steam, this image cannot automate downloading the server files with `steamcmd` and so a copy of the client or the server files within are required..
-  If this is incorrect, please open an issue.
-[^2]: The game server is stateless so the `--rm` flag is safe and saves your container history.
+  app to steam, this image cannot automate downloading the server files with `steamcmd` and so a copy of the client or at least the server files within is required.
+  If you know this is incorrect, please open an issue.
+[^2]: The game server is stateless so the `--rm` flag is safe and keeps your container history clear.
