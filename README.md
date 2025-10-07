@@ -2,8 +2,9 @@
 
 ---
 
-**NOTE**: As of 2024-01-01, **dread hunger is no longer supported by the developer and cannot be purchased from steam**.
-This means you must already own the game on steam or otherwise have access to the files in order to be able to build this image.
+> [!IMPORTANT]
+> As of 2024-01-01, **dread hunger is no longer supported by the developer and cannot be purchased from steam**.
+> This means you must already own the game on steam or otherwise have access to the files in order to be able to build this image.
 
 A docker image for running a dedicated server for the game [Dread Hunger](https://store.steampowered.com/app/1418630/Dread_Hunger/) on linux.
 
